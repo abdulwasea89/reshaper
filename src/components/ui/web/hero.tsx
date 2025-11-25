@@ -8,12 +8,12 @@ export function Hero() {
   return (
     <section className="mt-[40px] md:mt-[60px] lg:mt-[180px] min-h-[400px] md:min-h-[530px] relative lg:h-[calc(100vh-300px)] overflow-hidden">
       <div className="flex flex-col container mx-auto px-4 max-w-[1200px]">
-        <Link href="/updates/midday-v1-1">
+        {/* <Link href="/updates/midday-v1-1">
           <Button
             variant="outline"
             className="rounded-full border-border flex space-x-2 items-center"
           >
-            <span className="text-[10px] md:text-xs">Midday v1.1</span>
+            <span className="text-[10px] md:text-xs">ReShaper v0.01</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={12}
@@ -26,13 +26,14 @@ export function Hero() {
               />
             </svg>
           </Button>
-        </Link>
+        </Link> */}
 
-        <h2 className="mt-4 md:mt-6 lg:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[28px] lg:text-[32px] font-medium font-serif">
-          Your AI-powered business assistant for finances, reconciliation &
-          invoicing{" "}
-          <span className="text-primary">that saves you hours every week</span>.
-        </h2>
+<h2 className="mt-4 md:mt-6 lg:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[28px] lg:text-[32px] font-medium font-serif">
+  Paste a link. Get scroll-stopping content for LinkedIn & X —{" "}
+  <span className="text-primary">auto-written, auto-optimized, auto-posted</span>.
+</h2>
+
+
 
         <div className="mt-6 md:mt-8 lg:mt-10">
           <div className="flex items-center space-x-4">
