@@ -11,7 +11,7 @@ const Perks = () => {
             <div className="flex flex-col items-center text-center gap-4">
 
                 <AnimationContainer animation="fadeUp" delay={0.3}>
-                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium !leading-tight text-transparent bg-clip-text bg-gradient-to-b from-foreground to-neutral-400">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium  !leading-tight text-transparent bg-clip-text bg-gradient-to-b from-foreground to-neutral-400">
                         Use our platform
                         <br />
                         with powerful tools

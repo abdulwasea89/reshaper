@@ -20,13 +20,13 @@ export default async function HomePage() {
     return (
         <>
             <Navbar user={session?.user} />
-            <section className="w-full">
+            
                 <Hero />
-            </section>
+            
 
-            <section className="w-full">
+            
                 <Perks />
-            </section>
+            
 
             <section className="w-full">
                 <HowItWorks />

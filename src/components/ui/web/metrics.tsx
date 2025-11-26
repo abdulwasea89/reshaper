@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Metrics() {
   return (
-    <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-4 max-w-[1200px]">
+    <div className="container mx-auto px-4 md:px-6 lg:px-8">
       <div className="grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-7 md:flex md:flex-wrap md:items-center md:gap-x-8 lg:gap-x-12 xl:gap-x-16 mt-6 sm:mt-8 md:mt-14 lg:mt-20">
         <Link href="/open-startup" className="flex flex-col">
           <h4 className="text-[#878787] text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs mb-0.5 sm:mb-1 uppercase tracking-wide">Businesses</h4>
