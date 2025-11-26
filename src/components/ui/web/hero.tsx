@@ -1,72 +1,100 @@
-import { Button } from "@/../packages/ui/src/components/button";
+import Image from "next/image";
 import Link from "next/link";
-import { HeroImage } from "./hero-image";
-import { ArrowRight } from "lucide-react"; // Assuming you have lucide-react or similar for icons
+import AnimationContainer from "@/components/global/animation-container";
+import Images from "@/components/global/images";
+import Wrapper from "@/components/global/wrapper";
+import { Button } from "@/components/ui/shadcn/button";
+import Marquee from "@/components/ui/shadcn/marquee";
+import SectionBadge from "@/components/ui/shadcn/section-badge";
 
-export function Hero() {
-  return (
-    <section className="pt-32 sm:pt-40 md:pt-48 lg:pt-[150px] min-h-screen overflow-hidden">
-      <div className="flex flex-col container mx-auto px-4 sm:px-6 md:px-8 lg:px-4 max-w-[1200px]">
-        
-        {/* 1. The Top "Pill" Badge */}
-        <Link href="/updates/midday-v1-1" className="w-fit mb-6 sm:mb-8">
-          <div className="
-            rounded-full border border-[#2C2C2C] bg-[#1A1A1A]/50 
-            flex space-x-2 items-center px-4 py-1.5 
-            hover:bg-[#2C2C2C] transition-colors duration-200 cursor-pointer
-          ">
-            <span className="text-[11px] md:text-xs font-medium text-white">Reshaper </span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={12}
-              height={12}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-[#878787]"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </div>
-        </Link>
+const Hero = () => {
 
-        {/* 2. The Headline */}
-        <h1 className="
-          max-w-full sm:max-w-[700px] md:max-w-[800px] 
-          text-[#878787] 
-          text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] 
-          leading-[1.2] sm:leading-[1.15] 
-          font-serif tracking-tight
-        ">
-            Your AI Assistant that create posts with Blog posts, YT Videos {" "}
-          <span className="text-white">that saves you hours every week</span>.
-        </h1>
+    const companies = [
+        Images.comp1,
+        Images.comp2,
+        Images.comp3,
+        Images.comp4,
+        Images.comp5,
+        Images.comp6,
+    ];
 
-        {/* 3. Button & Trial Text */}
-        <div className="mt-8 sm:mt-10 md:mt-12">
-          <div className="flex flex-col items-start gap-4">
-            <a href="https://app.midday.ai">
-              <Button className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 text-sm font-medium bg-white text-black hover:bg-gray-200">
-                Meet your assistant
-              </Button>
-            </a>
-            <p className="text-[10px] sm:text-xs text-[#707070] font-mono">
-              3 day trial (No credit card required)
-            </p>
-          </div>
-        </div>
+    return (
+        <Wrapper className="pt-20 lg:pt-32 relative min-h-screen w-full h-full flex-1">
+            <div className="flex flex-col lg:flex-row w-full h-full lg:gap-10 xl:gap-16">
+                <div className="flex flex-col items-start gap-10 py-8 w-full">
+                    <div className="flex flex-col items-start gap-4">
+                        <AnimationContainer animation="fadeUp" delay={0.1}>
+                            <SectionBadge title="Trusted by 10,000+ Users" />
+                        </AnimationContainer>
 
-        {/* 4. The Hero Image (Dashboard) */}
-        {/* We moved this inside the container and added margin-top to separate it from the text */}
-        
-           {/* Assuming HeroImage contains the dashboard screenshot */}
-           {/* <HeroImage /> */}
+                        <AnimationContainer animation="fadeUp" delay={0.2}>
+                            <h1 className="text-5xl lg:text-6xl font-medium !leight text-transparent bg-clip-text bg-white">
+                                Effortless Real Estate Trading
+                            </h1>
+                        </AnimationContainer>
 
-      </div>
-    </section>
-  );
-}
+                        <AnimationContainer animation="fadeUp" delay={0.3}>
+                            <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
+                                Simplify your property journey with our comprehensive platform. Buy, sell, or manage properties with ease using our innovative tools and expert guidance.
+                            </p>
+                        </AnimationContainer>
+                    </div>
+
+                    <AnimationContainer animation="fadeUp" delay={0.4}>
+                        <div className="w-full">
+                            <Link href="/">
+                                <Button size="md" className="w-full md:w-auto p-2">
+                                    Start free trial
+                                </Button>
+                            </Link>
+                        </div>
+                    </AnimationContainer>
+
+                    <AnimationContainer animation="fadeUp" delay={0.5}>
+                        <div className="flex flex-col items-start gap-4 py-4">
+                            <p className="text-sm md:text-base text-muted-foreground">
+                                Trusted by Industry Leaders
+                            </p>
+                            <div className="w-full relative max-w-[calc(100vw-2rem)] lg:max-w-lg">
+                                <Marquee className="[--duration:40s] select-none [--gap:2rem]">
+                                    {[...Array(10)].map((_, index) => (
+                                        <div key={index} className="flex items-center justify-center text-muted-foreground h-16">
+                                            {companies[index % companies.length]({ className: "w-auto h-5" })}
+                                        </div>
+                                    ))}
+                                </Marquee>
+                                <div className="pointer-events-none absolute inset-y-0 -right-1 w-1/3 bg-gradient-to-l from-[#101010] z-40"></div>
+                                <div className="pointer-events-none absolute inset-y-0 -left-1 w-1/3 bg-gradient-to-r from-[#101010] z-40"></div>
+                            </div>
+                        </div>
+                    </AnimationContainer>
+                </div>
+
+                <AnimationContainer animation="fadeRight" delay={0.2}>
+                    <div className="flex flex-col items-start justify-start w-full h-min relative overflow-visible">
+                        <div className="lg:aspect-[1.3884514435695539/1] w-full lg:w-[1000px] lg:h-[auto,720px] relative">
+                            <div className="pointer-events-none hidden lg:block absolute inset-y-0 right-1/4 w-1/3 h-full bg-gradient-to-l from-background z-50"></div>
+                            <div className="lg:absolute lg:inset-0">
+                                <Image
+                                    src="/hero.png"
+                                    alt="PropEase Dashboard Preview"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    width={1024}
+                                    height={1024}
+                                    className="object-contain w-full h-auto rounded-xl lg:rounded-2xl shadow-2xl border border-border/50"
+                                    priority
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </AnimationContainer>
+            </div>
+            {/* Gradient background effect */}
+            <AnimationContainer animation="scaleUp" delay={0.6} className="absolute w-2/3 h-auto -top-[8%] left-1/4 -z-10">
+                <div className="w-full h-96 bg-gradient-to-b from-primary/20 via-primary/10 to-transparent blur-3xl" />
+            </AnimationContainer>
+        </Wrapper>
+    )
+};
+
+export default Hero
