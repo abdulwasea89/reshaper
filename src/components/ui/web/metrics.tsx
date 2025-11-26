@@ -2,23 +2,23 @@ import Link from "next/link";
 
 export function Metrics() {
   return (
-    <div className="container mx-auto px-4 max-w-[1200px]">
-      <div className="grid grid-cols-2 gap-6 md:flex md:flex-wrap md:items-center md:gap-x-12 lg:gap-x-16 xl:gap-x-20 mt-12 md:mt-16 lg:mt-24">
+    <div className="container mx-auto px-3 sm:px-6 md:px-8 lg:px-4 max-w-[1200px]">
+      <div className="grid grid-cols-2 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-7 md:flex md:flex-wrap md:items-center md:gap-x-8 lg:gap-x-12 xl:gap-x-16 mt-6 sm:mt-8 md:mt-14 lg:mt-20">
         <Link href="/open-startup" className="flex flex-col">
-          <h4 className="text-[#878787] text-[10px] md:text-xs mb-1">Businesses</h4>
-          <span className="text-lg md:text-xl lg:text-2xl text-white font-medium">20,600+</span>
+          <h4 className="text-[#878787] text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs mb-0.5 sm:mb-1 uppercase tracking-wide">Businesses</h4>
+          <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white font-medium">20,600+</span>
         </Link>
         <Link href="/open-startup" className="flex flex-col">
-          <h4 className="text-[#878787] text-[10px] md:text-xs mb-1">Bank accounts</h4>
-          <span className="text-lg md:text-xl lg:text-2xl text-white font-medium">6.700+</span>
+          <h4 className="text-[#878787] text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs mb-0.5 sm:mb-1 uppercase tracking-wide">Bank accounts</h4>
+          <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white font-medium">6.700+</span>
         </Link>
         <Link href="/open-startup" className="flex flex-col">
-          <h4 className="text-[#878787] text-[10px] md:text-xs mb-1">Transactions</h4>
-          <span className="text-lg md:text-xl lg:text-2xl text-white font-medium">1.7M</span>
+          <h4 className="text-[#878787] text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs mb-0.5 sm:mb-1 uppercase tracking-wide">Transactions</h4>
+          <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white font-medium">1.7M</span>
         </Link>
         <Link href="/open-startup" className="flex flex-col">
-          <h4 className="text-[#878787] text-[10px] md:text-xs mb-1">Transaction value</h4>
-          <span className="text-lg md:text-xl lg:text-2xl text-white font-medium">$812M</span>
+          <h4 className="text-[#878787] text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs mb-0.5 sm:mb-1 uppercase tracking-wide whitespace-nowrap">Transaction value</h4>
+          <span className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white font-medium">$812M</span>
         </Link>
       </div>
     </div>

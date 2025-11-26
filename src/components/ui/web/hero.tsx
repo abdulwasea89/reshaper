@@ -1,55 +1,72 @@
 import { Button } from "@/../packages/ui/src/components/button";
 import Link from "next/link";
 import { HeroImage } from "./hero-image";
-import { Metrics } from "./metrics";
-import { WordAnimation } from "./word-animation";
+import { ArrowRight } from "lucide-react"; // Assuming you have lucide-react or similar for icons
 
 export function Hero() {
   return (
-    <section className="mt-[40px] md:mt-[60px] lg:mt-[180px] min-h-[400px] md:min-h-[530px] relative lg:h-[calc(100vh-300px)] overflow-hidden">
-      <div className="flex flex-col container mx-auto px-4 max-w-[1200px]">
-        {/* <Link href="/updates/midday-v1-1">
-          <Button
-            variant="outline"
-            className="rounded-full border-border flex space-x-2 items-center"
-          >
-            <span className="text-[10px] md:text-xs">ReShaper v0.01</span>
+    <section className="pt-32 sm:pt-40 md:pt-48 lg:pt-[150px] min-h-screen overflow-hidden">
+      <div className="flex flex-col container mx-auto px-4 sm:px-6 md:px-8 lg:px-4 max-w-[1200px]">
+        
+        {/* 1. The Top "Pill" Badge */}
+        <Link href="/updates/midday-v1-1" className="w-fit mb-6 sm:mb-8">
+          <div className="
+            rounded-full border border-[#2C2C2C] bg-[#1A1A1A]/50 
+            flex space-x-2 items-center px-4 py-1.5 
+            hover:bg-[#2C2C2C] transition-colors duration-200 cursor-pointer
+          ">
+            <span className="text-[11px] md:text-xs font-medium text-white">Reshaper </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width={12}
               height={12}
+              viewBox="0 0 24 24"
               fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-[#878787]"
             >
-              <path
-                fill="currentColor"
-                d="M8.783 6.667H.667V5.333h8.116L5.05 1.6 6 .667 11.333 6 6 11.333l-.95-.933 3.733-3.733Z"
-              />
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
             </svg>
-          </Button>
-        </Link> */}
+          </div>
+        </Link>
 
-<h2 className="mt-4 md:mt-6 lg:mt-10 max-w-[580px] text-[#878787] leading-tight text-[20px] md:text-[28px] lg:text-[32px] font-medium font-serif">
-  Paste a link. Get scroll-stopping content for LinkedIn & X —{" "}
-  <span className="text-primary">auto-written, auto-optimized, auto-posted</span>.
-</h2>
+        {/* 2. The Headline */}
+        <h1 className="
+          max-w-full sm:max-w-[700px] md:max-w-[800px] 
+          text-[#878787] 
+          text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] 
+          leading-[1.2] sm:leading-[1.15] 
+          font-serif tracking-tight
+        ">
+            Your AI Assistant that create posts with Blog posts, YT Videos {" "}
+          <span className="text-white">that saves you hours every week</span>.
+        </h1>
 
-
-
-        <div className="mt-6 md:mt-8 lg:mt-10">
-          <div className="flex items-center space-x-4">
+        {/* 3. Button & Trial Text */}
+        <div className="mt-8 sm:mt-10 md:mt-12">
+          <div className="flex flex-col items-start gap-4">
             <a href="https://app.midday.ai">
-              <Button className="h-9 md:h-11 px-4 md:px-5 text-sm">Meet your assistant</Button>
+              <Button className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 text-sm font-medium bg-white text-black hover:bg-gray-200">
+                Meet your assistant
+              </Button>
             </a>
+            <p className="text-[10px] sm:text-xs text-[#707070] font-mono">
+              3 day trial (No credit card required)
+            </p>
           </div>
         </div>
 
-        <p className="text-[10px] md:text-xs text-[#707070] mt-3 md:mt-4 font-mono">
-          14 day trial (No credit card required)
-        </p>
-      </div>
+        {/* 4. The Hero Image (Dashboard) */}
+        {/* We moved this inside the container and added margin-top to separate it from the text */}
+        
+           {/* Assuming HeroImage contains the dashboard screenshot */}
+           {/* <HeroImage /> */}
 
-      <HeroImage />
-      <Metrics />
+      </div>
     </section>
   );
 }

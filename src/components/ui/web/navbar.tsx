@@ -45,11 +45,11 @@ export function Navbar({ user }: NavbarProps = {}) {
       </AnimatePresence>
 
       {/* ONLY THIS LINE CHANGED – fixes the squished mobile layout */}
-      <div className="fixed top-6 left-4 right-4 z-50 md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-auto">
-        
+      <div className="fixed top-4 sm:top-6 left-3 right-3 sm:left-4 sm:right-4 z-50 md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-auto">
+
         {/* Your 100% original navbar – only added the hamburger */}
-        <nav className="relative z-40 flex items-center justify-between gap-6 border-white/10 bg-[#121212] px-6 py-3">
-          
+        <nav className="relative z-40 flex items-center justify-between gap-4 sm:gap-6 border-white/10 bg-[#121212] px-4 sm:px-6 py-3">
+
           {/* Logo + text – now perfectly visible and spaced on mobile */}
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center text-white">
@@ -57,7 +57,7 @@ export function Navbar({ user }: NavbarProps = {}) {
                 <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0v2.25a.75.75 0 01-.75.75zM5.106 17.834a.75.75 0 001.06 1.06l1.591-1.59a.75.75 0 10-1.06-1.061l-1.591 1.59zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.166 5.106a.75.75 0 00-1.06 1.06l1.59 1.591a.75.75 0 101.061-1.06l-1.59-1.591z" />
               </svg>
             </Link>
-        
+
           </div>
 
           {/* Desktop links – untouched */}
@@ -108,11 +108,10 @@ export function Navbar({ user }: NavbarProps = {}) {
                     <button
                       key={feature.id}
                       onMouseEnter={() => setSelectedFeature(feature)}
-                      className={`group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
-                        selectedFeature.id === feature.id
-                          ? "bg-neutral-800 text-white"
-                          : "text-neutral-400 hover:bg-neutral-800/50 hover:text-white"
-                      }`}
+                      className={`group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${selectedFeature.id === feature.id
+                        ? "bg-neutral-800 text-white"
+                        : "text-neutral-400 hover:bg-neutral-800/50 hover:text-white"
+                        }`}
                     >
                       <feature.icon className="h-4 w-4" />
                       <span className="font-medium">{feature.title}</span>
