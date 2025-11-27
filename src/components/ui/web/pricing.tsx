@@ -17,10 +17,7 @@ const Pricing = () => {
     return (
         <Wrapper className="py-20 lg:py-32">
             <div className="flex flex-col items-center text-center gap-4">
-                <AnimationContainer animation="fadeUp" delay={0.2}>
-                    <SectionBadge title="Pricing" />
-                </AnimationContainer>
-
+               
                 <AnimationContainer animation="fadeUp" delay={0.3}>
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium !leading-tight text-transparent bg-clip-text bg-gradient-to-b from-foreground to-neutral-400">
                         Choose your perfect plan
@@ -47,11 +44,11 @@ const Pricing = () => {
                     </button>
                     <div
                         onClick={() => setIsYearly(!isYearly)}
-                        className="h-6 w-11 rounded-full bg-neutral-800 p-1 cursor-pointer transition-colors duration-300"
+                        className="h-6 w-11 rounded-full bg-[#121212]   p-1 cursor-pointer transition-colors duration-300"
                     >
                         <div
                             className={cn(
-                                "h-4 w-4 rounded-full bg-gradient-to-b from-primary to-orange-400 transition-transform duration-300",
+                                "h-4 w-4 rounded-full bg-[#9d9999]  transition-transform duration-300",
                                 isYearly && "translate-x-5"
                             )}
                         />
@@ -77,15 +74,15 @@ const Pricing = () => {
                     >
                         <div
                             className={cn(
-                                "relative rounded-3xl backdrop-blur-3xl p-8 flex flex-col overflow-hidden",
+                                "relative r backdrop-blur-3xl p-8 flex flex-col overflow-hidden",
                                 plan.popular && "bg-[#181818]",
                                 !plan.popular && "bg-gradient-to-b from-[#181818] to-[#101010]/0"
                             )}
                         >
                             {plan.popular && (
                                 <>
-                                    <div className="absolute inset-x-0 mx-auto -top-1/8 size-40 rounded-full bg-primary -z-10 blur-[5rem]" />
-                                    <div className="absolute top-0 w-4/5 mx-auto inset-x-0 h-px bg-gradient-to-r from-primary/0 via-primary to-primary/0"></div>
+                                    <div className="absolute inset-x-0 mx-auto -top-1/8 size-40 rounded-full bg-[#52ff6c] -z-10 blur-[5rem]" />
+                                    <div className="absolute top-0 w-4/5 mx-auto inset-x-0 h-px bg-[#52ff6c]-to-r from-primary/0 via-primary to-primary/0"></div>
                                 </>
                             )}
 
@@ -138,6 +135,7 @@ const Pricing = () => {
                                     Get Started
                                 </Button>
                             </AnimationContainer>
+                            
                         </div>
                     </AnimationContainer>
                 ))}

@@ -17,7 +17,7 @@ export const HOW_IT_WORKS: HowItWorksItem[] = [
     },
     {
         title: "Close Deals Faster",
-        description: "Streamline negotiations and paperwork with our automated systems and expert support for quick, hassle-free closings.",
+        description: "Manage listings, track inquiries, and handle transactions from one central dashboard.",
         image: "/images/hiw-three.svg"
     }
 ];

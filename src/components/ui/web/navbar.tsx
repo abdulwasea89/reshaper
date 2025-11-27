@@ -48,7 +48,7 @@ export function Navbar({ user }: NavbarProps = {}) {
       <div className="fixed top-4 sm:top-6 left-3 right-3 sm:left-4 sm:right-4 z-50 md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-auto">
 
         {/* Your 100% original navbar – only added the hamburger */}
-        <nav className="relative z-40 flex items-center justify-between gap-4 sm:gap-6 border-white/10 bg-[#121212] px-4 sm:px-6 py-3">
+        <nav className="relative z-40 flex items-center justify-between gap-4 sm:gap-6 border-white/10 bg-[#121212] px-4 sm:px-6 py-3 border-2">
 
           {/* Logo + text – now perfectly visible and spaced on mobile */}
           <div className="flex items-center gap-3">

@@ -8,9 +8,6 @@ const FAQ = () => {
     return (
         <Wrapper className="py-20 lg:py-32">
             <div className="flex flex-col items-center text-center gap-4">
-                <AnimationContainer animation="fadeUp" delay={0.2}>
-                    <SectionBadge title="FAQ" />
-                </AnimationContainer>
 
                 <AnimationContainer animation="fadeUp" delay={0.3}>
                     <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium !leading-tight text-transparent bg-clip-text bg-gradient-to-b from-foreground to-neutral-400">
@@ -35,7 +32,7 @@ const FAQ = () => {
                         >
                             <AccordionItem
                                 value={`item-${index}`}
-                                className="border-none bg-[#191919] rounded-2xl px-6"
+                                className="border-none bg-[#191919]  px-6"
                             >
                                 <AccordionTrigger className="hover:no-underline py-6 text-base md:text-lg text-left font-normal">
                                     {item.question}

@@ -35,8 +35,7 @@ const HowItWorks = () => {
                     >
                         <div
                             className={cn(
-                                "flex flex-col items-start gap-4 bg-gradient-to-b rounded-lg lg:rounded-2xl p-4 lg:p-8",
-                                index % 2 === 0 ? "from-neutral-900 to-transparent" : "from-transparent to-neutral-900"
+                                "flex flex-col items-start gap-4  p-4 lg:p-8 bg-[#121212] border-2"
                             )}
                         >
                             <div className="flex items-center gap-x-4">
@@ -44,7 +43,7 @@ const HowItWorks = () => {
                                     animation="scaleUp"
                                     delay={0.7 + (index * 0.2)}
                                 >
-                                    <div className="size-10 rounded-full bg-gradient-to-b from-primary to-orange-400 flex items-center justify-center">
+                                    <div className="size-10  flex items-center justify-center">
                                         <span className="text-lg font-medium text-white">
                                             {index + 1}
                                         </span>
