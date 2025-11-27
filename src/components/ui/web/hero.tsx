@@ -23,9 +23,6 @@ const Hero = () => {
             <div className="flex flex-col lg:flex-row w-full h-full lg:gap-16">
                 <div className="flex flex-col items-start gap-10 py-8 w-full">
                     <div className="flex flex-col items-start gap-4">
-                        <AnimationContainer animation="fadeUp" delay={0.2}>
-                            <SectionBadge title="Trusted by 10,000+ Users" />
-                        </AnimationContainer>
 
                         <AnimationContainer animation="fadeUp" delay={0.4}>
                             <h1 className="text-5xl lg:text-6xl font-medium !leading-tight text-transparent bg-clip-text bg-gradient-to-r from-foreground to-neutral-500">
@@ -43,7 +40,7 @@ const Hero = () => {
                     <AnimationContainer animation="fadeUp" delay={0.8}>
                         <div className="w-full">
                             <Link href="/">
-                                <Button size="md" className="w-full md:w-auto">
+                                <Button size="md" className="w-full md:w-auto p-3">
                                     Start free trial
                                 </Button>
                             </Link>
@@ -52,9 +49,6 @@ const Hero = () => {
 
                     <AnimationContainer animation="fadeUp" delay={1}>
                         <div className="flex flex-col items-start gap-4 py-4">
-                            <p className="text-sm md:text-base text-muted-foreground">
-                                Trusted by Industry Leaders
-                            </p>
                             <div className="w-full relative max-w-[calc(100vw-2rem)] lg:max-w-lg">
                                 <Marquee className="[--duration:40s] select-none [--gap:2rem]">
                                     {[...Array(10)].map((_, index) => (
@@ -63,8 +57,7 @@ const Hero = () => {
                                         </div>
                                     ))}
                                 </Marquee>
-                                <div className="pointer-events-none absolute inset-y-0 -right-1 w-1/3 bg-gradient-to-l from-[#101010] z-40"></div>
-                                <div className="pointer-events-none absolute inset-y-0 -left-1 w-1/3 bg-gradient-to-r from-[#101010] z-40"></div>
+                                
                             </div>
                         </div>
                     </AnimationContainer>
