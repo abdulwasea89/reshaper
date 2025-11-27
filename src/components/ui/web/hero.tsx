@@ -26,14 +26,12 @@ const Hero = () => {
 
                         <AnimationContainer animation="fadeUp" delay={0.4}>
                             <h1 className="text-5xl lg:text-6xl font-medium !leading-tight text-transparent bg-clip-text bg-gradient-to-r from-foreground to-neutral-500">
-                                Effortless Real Estate Trading
-                            </h1>
+10x Your Content Output. Zero Extra Effort.                            </h1>
                         </AnimationContainer>
 
                         <AnimationContainer animation="fadeUp" delay={0.6}>
                             <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
-                                Simplify your property journey with our comprehensive platform. Buy, sell, or manage properties with ease using our innovative tools and expert guidance.
-                            </p>
+Stop writing from scratch. Turn a single blog post, video transcript, or messy note into a week’s worth of Twitter threads, LinkedIn stories, and TikTok scripts instantly.                            </p>
                         </AnimationContainer>
                     </div>
 
