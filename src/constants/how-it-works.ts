@@ -8,7 +8,7 @@ export const HOW_IT_WORKS: HowItWorksItem[] = [
     {
         title: "List Your Property",
         description: "Easily list your property with detailed information, high-quality photos, and competitive pricing in just minutes.",
-        image: "/images/hiw-one.svg"
+        image: "/01.png"
     },
     {
         title: "Smart Management",

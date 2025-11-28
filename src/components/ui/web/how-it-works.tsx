@@ -9,10 +9,6 @@ const HowItWorks = () => {
     return (
         <Wrapper className="py-20 lg:py-32 relative">
             <div className="flex flex-col items-center text-center gap-4 py-8 w-full">
-                <AnimationContainer animation="fadeUp" delay={0.2}>
-                    <SectionBadge title="How it works" />
-                </AnimationContainer>
-
                 <AnimationContainer animation="fadeUp" delay={0.3}>
                     <h1 className="text-2xl md:text-4xl lg:text-5xl font-medium !leading-tight text-transparent bg-clip-text bg-gradient-to-b from-foreground to-neutral-400">
                         Three steps to success
@@ -54,7 +50,7 @@ const HowItWorks = () => {
                                 </h3>
                             </div>
                             <div className="space-y-4 w-full">
-                                <AnimationContainer
+                                 <AnimationContainer
                                     animation="fadeUp"
                                     delay={0.9 + (index * 0.2)}
                                 >
