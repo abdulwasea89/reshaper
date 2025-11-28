@@ -1,25 +1,25 @@
 export const FEATURES = [
     {
-        title: "Smart property management",
-        description: "Manage multiple properties effortlessly with our AI-powered dashboard. Track rent payments and maintenance schedules.",
-        image: "/images/f1.svg",
+        title: "Multi-Platform Generation",
+        description: "Instantly structure blog content into engagement-ready drafts for all major social platforms.",
+        image: "/images/f1.png",
         size: "large"
     },
     {
-        title: "Real-time analytics",
-        description: "Track property views, leads, and revenue through real-time analytics.",
+        title: "Real-Time ROI & Performance Analytics",
+        description: "Dynamically track time saved, usage quota, and content performance on a live dashboard.",
         image: "/images/f2.svg",
         size: "small"
     },
     {
-        title: "Smart transaction hub",
-        description: "Handle property transactions securely in one place, from offers to digital contracts and payments.",
+        title: "Viral Hook Score & History",
+        description: "Analyze and score headlines for maximum reach; securely save all successful generated drafts.",
         image: "/images/f3.svg",
         size: "large"
     },
     {
-        title: "Instant property valuation",
-        description: "Get real-time market valuations powered by AI and big data for informed pricing decisions.",
+        title: "Intelligent Source Fetching (NEW)",
+        description: "Paste any URL (blog or video) to automatically fetch and clean source content for repurposing.",
         image: "/images/f4.svg",
         size: "small"
     },

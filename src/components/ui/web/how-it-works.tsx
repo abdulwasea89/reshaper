@@ -23,6 +23,7 @@ const HowItWorks = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 w-full pt-10">
+                
                 {HOW_IT_WORKS.map((item, index) => (
                     <AnimationContainer
                         key={index}
@@ -34,6 +35,7 @@ const HowItWorks = () => {
                                 "flex flex-col items-start gap-4  p-4 lg:p-8 bg-[#121212] border-2"
                             )}
                         >
+                            
                             <div className="flex items-center gap-x-4">
                                 <AnimationContainer
                                     animation="scaleUp"

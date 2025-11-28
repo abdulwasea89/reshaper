@@ -6,8 +6,8 @@ export interface HowItWorksItem {
 
 export const HOW_IT_WORKS: HowItWorksItem[] = [
     {
-        title: "List Your Property",
-        description: "Easily list your property with detailed information, high-quality photos, and competitive pricing in just minutes.",
+        title: "Enter the Link",
+        description: "Add the ",
         image: "/01.png"
     },
     {

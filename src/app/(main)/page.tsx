@@ -24,9 +24,9 @@ export default async function HomePage() {
 
 
 
-            <section className="w-full">
+            {/* <section className="w-full">
                 <HowItWorks />
-            </section>
+            </section> */}
 
             <section className="w-full">
                 <Features />
