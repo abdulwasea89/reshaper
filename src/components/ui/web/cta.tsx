@@ -14,7 +14,7 @@ const CTA = () => {
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#101010] w-full h-1/2 z-10"></div>
 
                 <AnimationContainer animation="scaleUp" delay={0.2} className="w-full mx-auto">
-                    <div className="absolute -top-1/2 inset-x-0 mx-auto bg-[#51c975] rounded-full size-1/2 blur-[4rem] lg:blur-[10rem]"></div>
+                    <div className="absolute -top-1/2 inset-x-0 mx-auto bg-foreground/50 rounded-full size-1/2 blur-[4rem] lg:blur-[10rem]"></div>
                 </AnimationContainer>
 
                 <AnimationContainer animation="scaleUp" delay={0.3}>
@@ -34,6 +34,7 @@ const CTA = () => {
                 </AnimationContainer>
 
                 <div className="flex flex-col items-center justify-center w-full z-30">
+
                     <AnimationContainer animation="fadeUp" delay={0.4}>
                         <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium !leading-tight text-transparent bg-clip-text bg-gradient-to-b from-foreground to-neutral-400">
                             Ready to get started?
