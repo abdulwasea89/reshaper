@@ -7,12 +7,13 @@ import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import React from 'react';
 
-
 export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <main>
-      <div className="grid h-dvh justify-center p-2 lg:grid-cols-2">
-        <div className="bg-primary relative order-2 hidden h-full rounded-3xl lg:flex">
+    <main className="h-dvh">
+      <div className="grid h-full justify-center p-2 lg:grid-cols-2">
+        {/* Left Side (Marketing Panel - White/Light) */}
+        <div className="bg-[#21ad67] relative order-2 hidden h-full rounded-3xl lg:flex">
+          {/* ... Marketing Content (No Change) ... */}
           <div className="text-primary-foreground absolute top-24 space-y-1 px-10">
             <Command className="size-10" />
             <h1 className="text-2xl font-medium">{APP_CONFIG.name}</h1>
@@ -33,13 +34,20 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
             </div>
           </div>
         </div>
-        <Link href="/" className="absolute top-4 left-4">
-          <Button size="sm" variant="outline">
-            <ArrowLeftIcon className="size-4 mr-1" />
-            Home
-          </Button>
-        </Link>
-        <div className="relative order-1 flex h-full">{children}</div>
+        
+        {/* Right Side (Auth Form - Dark Background) */}
+        <div className="relative order-1 flex h-full justify-center items-center">
+            
+            {/* FIX: Moved the Link inside the content area for better flow and placement. 
+                    Used variant="ghost" to ensure it stands out on the dark background. */}
+            <Link href="/" className="absolute top-4 mr-72 lg:left-10 z-10">
+                <Button size="sm" variant="ghost" className="text-white hover:bg-zinc-800">
+                    <ArrowLeftIcon className="size-4 mr-1" />
+                </Button>
+            </Link>
+            
+            {children}
+        </div>
       </div>
     </main>
   );
