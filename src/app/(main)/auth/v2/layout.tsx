@@ -2,6 +2,11 @@ import { ReactNode } from "react";
 import { Command } from "lucide-react";
 import { Separator } from "@/components/ui/shadcn/separator";
 import { APP_CONFIG } from "@/config/app-config";
+import { Button } from "@/components/ui/shadcn/button";
+import { ArrowLeftIcon } from "lucide-react";
+import Link from "next/link";
+import React from 'react';
+
 
 export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
   return (
@@ -28,6 +33,12 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
             </div>
           </div>
         </div>
+        <Link href="/" className="absolute top-4 left-4">
+          <Button size="sm" variant="outline">
+            <ArrowLeftIcon className="size-4 mr-1" />
+            Home
+          </Button>
+        </Link>
         <div className="relative order-1 flex h-full">{children}</div>
       </div>
     </main>
