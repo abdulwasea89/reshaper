@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
-import { ChatOpenAI } from "@langchain/openai";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { PromptTemplate } from "@langchain/core/prompts";
+import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
 
 export async function POST(request: NextRequest) {
     try {
@@ -29,9 +29,10 @@ export async function POST(request: NextRequest) {
         const pageContent = docs[0].pageContent;
 
         // Initialize OpenAI model
-        const model = new ChatOpenAI({
-            modelName: "gpt-4o-mini",
+        const model = new ChatGoogleGenerativeAI({
+model: "gemini-2.5-pro",
             temperature: 0.7,
+            apiKey: process.env.GEMINI_API_KEY
         });
 
         // Create prompt template for generating social media posts

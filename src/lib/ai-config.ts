@@ -1,17 +1,13 @@
-import { OpenAI } from "openai";
-import { OpenAIChatCompletionsModel } from "@openai/agents";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { aisdk } from "@openai/agents-extensions";
 
-// Initialize Gemini client using OpenAI SDK
-export const geminiClient = new OpenAI({
-    apiKey: process.env.GEMINI_API_KEY || "",
-    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+// Create Google provider instance with API key
+const google = createGoogleGenerativeAI({
+    apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY,
 });
 
-// Gemini model instance
-export const geminiModel = new OpenAIChatCompletionsModel(
-    geminiClient,
-    "gemini-2.0-flash-exp"
-);
+// Initialize Gemini model using Vercel AI SDK adapter
+export const geminiModel = aisdk(google("gemini-2.0-flash-exp"));
 
 // Model configuration
 export const AI_CONFIG = {
