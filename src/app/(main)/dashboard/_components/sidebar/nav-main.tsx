@@ -165,6 +165,15 @@ export function NavMain({ items }: NavMainProps) {
               <SidebarMenuButton
                 tooltip="Quick Create"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+                onClick={async () => {
+                  try {
+                    const response = await fetch("/api/posts", { method: "POST" });
+                    const data = await response.json();
+                    window.location.href = `/p/${data.id}/create`;
+                  } catch (error) {
+                    console.error("Error creating post:", error);
+                  }
+                }}
               >
                 <PlusCircleIcon />
                 <span>Quick Create</span>

@@ -42,9 +42,12 @@ export function LoginForm() {
         rememberMe: data.remember,
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           toast.success("Logged in successfully");
-          router.push("/dashboard");
+          // Create new post
+          const response = await fetch("/api/posts", { method: "POST" });
+          const data = await response.json();
+          router.push(`/p/${data.id}/create`);
           router.refresh();
         },
         onError: (ctx) => {

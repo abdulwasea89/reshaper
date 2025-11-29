@@ -48,9 +48,12 @@ export function RegisterForm() {
         name: data.name,
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           toast.success("Account created successfully");
-          router.push("/dashboard");
+          // Create new post
+          const response = await fetch("/api/posts", { method: "POST" });
+          const data = await response.json();
+          router.push(`/p/${data.id}/create`);
           router.refresh();
         },
         onError: (ctx) => {
