@@ -47,7 +47,20 @@ export async function POST(request: NextRequest) {
                         editRequest
                     );
 
-                    // Stream the edited content
+                    // Create a natural response message
+                    const responseMessage = `I've updated your content based on your request: "${editRequest}". The changes have been applied to your posts.`;
+
+                    // Send response message first
+                    controller.enqueue(
+                        encoder.encode(
+                            `data: ${JSON.stringify({
+                                type: "message",
+                                message: responseMessage,
+                            })}\n\n`
+                        )
+                    );
+
+                    // Then stream the edited content
                     controller.enqueue(
                         encoder.encode(
                             `data: ${JSON.stringify({

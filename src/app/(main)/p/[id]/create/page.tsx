@@ -50,14 +50,14 @@ function CreatePostClient({ params, urlParam }: { params: { id: string }; urlPar
     };
 
     return (
-        <div className="min-h-screen bg-[#0C0C0C] text-white flex">
-            {/* Post Cards - Left Side - Takes remaining space */}
-            <div className="flex-1 p-8">
+        <div className="min-h-screen bg-[#0C0C0C] text-white flex flex-col md:flex-row">
+            {/* Post Cards - Left Side on desktop, top on mobile */}
+            <div className="flex-1 p-4 md:p-8">
                 <PostCanvas content={content} onChange={handleContentChange} />
             </div>
 
-            {/* AI Chat - Right Side - Fixed width, no margins, sticky to left edge */}
-            <div className="w-96 border-l border-border">
+            {/* AI Chat - Right Side on desktop, bottom on mobile - Fixed width on desktop */}
+            <div className="w-full md:w-96 border-t md:border-t-0 md:border-l border-border">
                 <AIChat
                     currentContent={content}
                     onContentUpdate={setContent}

@@ -11,7 +11,7 @@ const fetchContentTool = tool({
         url: z.string().describe("The URL to scrape"),
     }),
     execute: async ({ url }) => {
-        try {
+        try {   
             const loader = new CheerioWebBaseLoader(url);
             const docs = await loader.load();
             const content = docs[0].pageContent;
