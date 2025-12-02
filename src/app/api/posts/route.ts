@@ -14,13 +14,17 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
+        // Get URL from request body (optional)
+        const body = await request.json().catch(() => ({}));
+        const url = body.url || null;
+
         // Create new post with unique ID
         const post = await prisma.post.create({
             data: {
                 userId: session.user.id,
                 title: null,
                 content: null,
-                originalLink: null,
+                originalLink: url,
             },
         });
 

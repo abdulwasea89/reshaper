@@ -6,25 +6,27 @@ import { InputSection } from "@/components/global/input-section";
 
 export default function Page() {
   return (
-    <div className="space-y-6">
-      {/* Quick Post Creation Input */}
-      <div className="flex justify-center">
-        <InputSection />
-      </div>
-
-      {/* Financial Dashboard */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="flex flex-col gap-4 lg:col-span-1">
-          <AccountOverview />
+    <div className="min-h-screen bg-[#0C0C0C] text-white">
+      <div className="container mx-auto px-4 py-8 space-y-6">
+        {/* Quick Post Creation Input */}
+        <div className="flex justify-center">
+          <InputSection />
         </div>
 
-        <div className="flex flex-col gap-4 lg:col-span-2">
-          <div className="flex-1">
-            <FinancialOverview />
+        {/* Financial Dashboard */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <div className="flex flex-col gap-4 lg:col-span-1">
+            <AccountOverview />
           </div>
-          <div className="grid flex-1 grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs md:grid-cols-2">
-            <ExpenseSummary />
-            <CurrencyExchange />
+
+          <div className="flex flex-col gap-4 lg:col-span-2">
+            <div className="flex-1">
+              <FinancialOverview />
+            </div>
+            <div className="grid flex-1 grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs md:grid-cols-2">
+              <ExpenseSummary />
+              <CurrencyExchange />
+            </div>
           </div>
         </div>
       </div>

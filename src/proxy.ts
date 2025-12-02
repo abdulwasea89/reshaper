@@ -6,7 +6,7 @@ import type { NextRequest } from "next/server";
 // For production, use Redis (e.g., Upstash) to store rate limit data.
 const rateLimitMap = new Map<string, { count: number; lastReset: number }>();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const MAX_REQUESTS = 100; // 100 requests per minute
+const MAX_REQUESTS = 1000; // 1000 requests per minute (increased for dev)
 
 export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
@@ -41,8 +41,10 @@ export async function proxy(request: NextRequest) {
     let response = NextResponse.next();
 
     // Redirect authenticated users away from auth pages
+    // Redirect authenticated users away from auth pages
     if (isAuthPage && isAuthenticated) {
-        response = NextResponse.redirect(new URL("/dashboard", request.url));
+        console.log("[Proxy] Authenticated user on auth page, NOT redirecting to dashboard to prevent loop.");
+        // response = NextResponse.redirect(new URL("/dashboard", request.url));
     }
     // Redirect unauthenticated users away from dashboard pages
     else if (isDashboardPage && !isAuthenticated) {

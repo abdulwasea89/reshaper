@@ -76,7 +76,7 @@ export function Navbar({ user }: NavbarProps = {}) {
 
           <div className="hidden items-center gap-4 md:flex">
             <div className="h-4 w-[1px] bg-neutral-700" />
-            <Link href={user ? "/dashboard" : "/login"} className="text-sm font-medium text-white hover:text-neutral-300 transition-colors">
+            <Link href={user ? "/dashboard" : "/auth/v2/login"} className="text-sm font-medium text-white hover:text-neutral-300 transition-colors">
               {user ? "Dashboard" : "Sign in"}
             </Link>
           </div>
@@ -153,7 +153,7 @@ export function Navbar({ user }: NavbarProps = {}) {
                   </Link>
                 ))}
                 <div className="h-px bg-white/10" />
-                <Link href={user ? "/dashboard" : "/login"} className="block text-lg font-semibold text-white" onClick={() => setMobileMenuOpen(false)}>
+                <Link href={user ? "/dashboard" : "/auth/v2/login"} className="block text-lg font-semibold text-white" onClick={() => setMobileMenuOpen(false)}>
                   {user ? "Dashboard" : "Sign in"}
                 </Link>
               </div>

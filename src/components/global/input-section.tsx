@@ -16,12 +16,16 @@ export function InputSection() {
 
         setIsLoading(true);
         try {
-            // Create new post
-            const response = await fetch("/api/posts", { method: "POST" });
+            // Create new post with URL
+            const response = await fetch("/api/posts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url }),
+            });
             const data = await response.json();
 
-            // Redirect to the post creation page
-            window.location.href = `/p/${data.id}/create`;
+            // Redirect to the post creation page with URL as query parameter
+            window.location.href = `/p/${data.id}/create?url=${encodeURIComponent(url)}`;
         } catch (error) {
             console.error("Error creating post:", error);
             setIsLoading(false);
