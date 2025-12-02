@@ -4,17 +4,12 @@
  */
 
 export const ModelConfig = {
-    // Primary model for agents
-    modelName: process.env.GEMINI_MODEL_NAME || "gemini-2.0-flash-exp",
+    modelName: process.env.GEMINI_MODEL_NAME || "gemini-2.0-flash",
     temperature: parseFloat(process.env.GEMINI_MODEL_TEMP || "0.7"),
     maxTokens: parseInt(process.env.GEMINI_MAX_TOKENS || "4000"),
-
-    // Agent-specific settings
     maxIterations: parseInt(process.env.AGENT_MAX_ITERATIONS || "5"),
-
-    // API Configuration
     apiKey: process.env.GEMINI_API_KEY!,
-    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+    baseURL: process.env.BASE_URL! || "https://generativelanguage.googleapis.com/v1beta/openai/",
 } as const;
 
 // Validate required environment variables

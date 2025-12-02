@@ -6,14 +6,8 @@ import { InputSection } from "@/components/global/input-section";
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-[#0C0C0C] text-white">
+    <div className="min-h-screen  text-white">
       <div className="container mx-auto px-4 py-8 space-y-6">
-        {/* Quick Post Creation Input */}
-        <div className="flex justify-center">
-          <InputSection />
-        </div>
-
-        {/* Financial Dashboard */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <div className="flex flex-col gap-4 lg:col-span-1">
             <AccountOverview />

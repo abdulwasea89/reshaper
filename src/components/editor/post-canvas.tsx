@@ -1,12 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/shadcn/card";
 import { Button } from "@/components/ui/shadcn/button";
-import { Input } from "@/components/ui/shadcn/input";
-import { Textarea } from "@/components/ui/shadcn/textarea";
-import { Save, Download, Sparkles, Twitter, Linkedin } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ThumbsUp, MessageCircle, Repeat2, Send, Heart, MessageSquare, BarChart2, Share, MoreHorizontal, Globe, Calendar, Sparkles } from "lucide-react";
 
 interface ContentData {
     title: string;
@@ -21,226 +16,197 @@ interface PostCanvasProps {
 }
 
 export function PostCanvas({ content, onChange }: PostCanvasProps) {
-    const [editingField, setEditingField] = useState<keyof ContentData | null>(null);
-
-    const handleFieldChange = (field: keyof ContentData, value: string) => {
-        onChange({ ...content, [field]: value });
-    };
-
-    const handleSave = async () => {
-        console.log("Saving content:", content);
-        // TODO: Implement save to database
-    };
-
-    const handleExport = () => {
-        const dataStr = JSON.stringify(content, null, 2);
-        const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(dataStr)}`;
-        const exportFileDefaultName = "post-content.json";
-
-        const linkElement = document.createElement("a");
-        linkElement.setAttribute("href", dataUri);
-        linkElement.setAttribute("download", exportFileDefaultName);
-        linkElement.click();
-    };
-
-    const getCharacterProgress = (text: string, max: number) => {
-        const percentage = (text.length / max) * 100;
-        return {
-            percentage: Math.min(percentage, 100),
-            color: percentage > 100 ? "text-destructive" : percentage > 80 ? "text-warning" : "text-primary",
-        };
-    };
-
     return (
-        <div className="h-full p-4 md:p-6 space-y-6">
-            {/* Header with Actions */}
-            <div className="flex justify-between items-center">
-                <div className="space-y-1">
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-                        AI-Generated Post
-                    </h2>
-                    <p className="text-sm text-muted-foreground">
-                        Edit your content using AI chat or click to edit directly
-                    </p>
+        <div className="max-w-4xl mx-auto space-y-8">
+            {/* Header */}
+            <div className="space-y-2">
+                <h1 className="text-4xl font-bold bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+                    AI-Generated Posts
+                </h1>
+                <p className="text-muted-foreground">
+                    Your posts are being generated in real-time by AI
+                </p>
+            </div>
+
+            {/* LinkedIn Post Card */}
+            <div className="bg-white rounded-lg overflow-hidden shadow-xl">
+                {/* LinkedIn Header */}
+                <div className="p-4 flex items-start justify-between">
+                    <div className="flex gap-3">
+                        <div className="w-12 h-12 rounded-full bg-linear-to-br from-blue-600 to-blue-700 flex items-center justify-center">
+                            <span className="text-white font-bold text-lg">U</span>
+                        </div>
+                        <div>
+                            <div className="flex items-center gap-2">
+                                <h3 className="font-semibold text-gray-900">Your Name</h3>
+                                <button className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full hover:bg-blue-700">
+                                    Subscribe
+                                </button>
+                            </div>
+                            <p className="text-sm text-gray-600">408,360 followers</p>
+                            <p className="text-xs text-gray-500 flex items-center gap-1">
+                                1w • Edited • <Globe className="w-3 h-3" />
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex gap-1">
+                        <button className="p-2 hover:bg-gray-100 rounded">
+                            <MoreHorizontal className="w-5 h-5 text-gray-600" />
+                        </button>
+                        <button className="p-2 hover:bg-gray-100 rounded">
+                            <span className="text-2xl text-gray-600">×</span>
+                        </button>
+                    </div>
                 </div>
-                <div className="flex gap-2">
-                    <Button onClick={handleSave} size="sm" className="gap-2">
-                        <Save className="h-4 w-4" />
-                        Save
+
+                {/* LinkedIn Content */}
+                <div className="px-4 pb-3">
+                    <div className="text-gray-900 text-sm leading-relaxed whitespace-pre-wrap min-h-[100px]">
+                        {content.linkedinPost || (
+                            <span className="text-gray-400 flex items-center gap-2">
+                                <Sparkles className="w-4 h-4 animate-pulse" />
+                                AI is generating your LinkedIn post...
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                {/* LinkedIn Image/Media Area */}
+                <div className="bg-linear-to-br from-purple-600 via-purple-500 to-purple-700 h-64 flex items-center justify-center">
+                    <div className="text-white text-center space-y-2">
+                        <div className="w-16 h-1 bg-white/80 mx-auto rounded-full"></div>
+                        <div className="w-12 h-1 bg-white/60 mx-auto rounded-full"></div>
+                    </div>
+                </div>
+
+                {/* LinkedIn Stats */}
+                <div className="px-4 py-2 border-b border-gray-200">
+                    <div className="flex items-center justify-between text-sm text-gray-600">
+                        <div className="flex items-center gap-1">
+                            <div className="flex -space-x-1">
+                                <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center border-2 border-white">
+                                    <ThumbsUp className="w-3 h-3 text-white" />
+                                </div>
+                                <div className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center border-2 border-white">
+                                    <Heart className="w-3 h-3 text-white" />
+                                </div>
+                            </div>
+                            <span>1,034</span>
+                        </div>
+                        <span>15 comments · 17 reposts</span>
+                    </div>
+                </div>
+
+                {/* LinkedIn Actions */}
+                <div className="px-4 py-3 flex items-center justify-around border-b border-gray-200">
+                    <button className="flex items-center gap-2 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded">
+                        <ThumbsUp className="w-5 h-5" />
+                        <span className="font-medium">Like</span>
+                    </button>
+                    <button className="flex items-center gap-2 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded">
+                        <MessageCircle className="w-5 h-5" />
+                        <span className="font-medium">Comment</span>
+                    </button>
+                    <button className="flex items-center gap-2 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded">
+                        <Repeat2 className="w-5 h-5" />
+                        <span className="font-medium">Repost</span>
+                    </button>
+                    <button className="flex items-center gap-2 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded">
+                        <Send className="w-5 h-5" />
+                        <span className="font-medium">Send</span>
+                    </button>
+                </div>
+
+                {/* LinkedIn Post Actions */}
+                <div className="px-4 py-3 flex gap-3">
+                    <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Schedule
                     </Button>
-                    <Button onClick={handleExport} variant="outline" size="sm" className="gap-2">
-                        <Download className="h-4 w-4" />
-                        Export
+                    <Button className="flex-1 bg-primary hover:bg-primary/90">
+                        <Send className="w-4 h-4 mr-2" />
+                        Post Now
                     </Button>
                 </div>
             </div>
 
-            {/* Title Card */}
-            <Card className="group relative overflow-hidden border-2 transition-all hover:shadow-xl hover:border-primary/50">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <CardHeader>
-                    <div className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-primary" />
-                        <CardTitle>Post Title</CardTitle>
+            {/* X/Twitter Post Card */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-xl max-w-md mx-auto">
+                {/* X Header */}
+                <div className="p-4 flex items-start gap-3">
+                    <div className="w-12 h-12 rounded-full bg-linear-to-br from-sky-500 to-sky-600 flex items-center justify-center flex-shrink-0">
+                        <span className="text-white font-bold text-lg">U</span>
                     </div>
-                    <CardDescription>Maximum 100 characters</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                    <Input
-                        value={content.title}
-                        onChange={(e) => handleFieldChange("title", e.target.value)}
-                        placeholder="Enter your post title..."
-                        className="text-lg font-semibold bg-background/50 backdrop-blur-sm"
-                        maxLength={100}
-                    />
-                    <div className="flex justify-between text-xs">
-                        <span className={cn("font-medium", getCharacterProgress(content.title, 100).color)}>
-                            {content.title.length}/100 characters
-                        </span>
-                        <div className="w-32 h-1.5 bg-muted rounded-full overflow-hidden">
-                            <div
-                                className={cn(
-                                    "h-full transition-all duration-300 rounded-full",
-                                    getCharacterProgress(content.title, 100).color.replace("text-", "bg-")
-                                )}
-                                style={{ width: `${getCharacterProgress(content.title, 100).percentage}%` }}
-                            />
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1">
+                            <h3 className="font-bold text-gray-900">Your Name</h3>
+                            <span className="text-gray-500">@username</span>
                         </div>
+                        <div className="mt-2 text-gray-900 text-sm leading-relaxed whitespace-pre-wrap min-h-[80px]">
+                            {content.twitterPost || (
+                                <span className="text-gray-400 flex items-center gap-2">
+                                    <Sparkles className="w-4 h-4 animate-pulse" />
+                                    AI is generating your X post...
+                                </span>
+                            )}
+                        </div>
+                        {content.twitterPost && (
+                            <p className="text-sky-500 text-sm mt-1">#hashtag</p>
+                        )}
                     </div>
-                </CardContent>
-            </Card>
+                </div>
 
-            {/* Social Media Posts Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
-                {/* LinkedIn Post */}
-                <Card className="group relative overflow-hidden border-2 transition-all hover:shadow-xl hover:border-blue-500/50">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <CardHeader>
-                        <div className="flex items-center gap-2">
-                            <Linkedin className="h-5 w-5 text-blue-600" />
-                            <CardTitle>LinkedIn Post</CardTitle>
-                        </div>
-                        <CardDescription>Professional tone • Max 300 characters</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        {/* LinkedIn Preview */}
-                        <div className="relative">
-                            <div className="rounded-lg border bg-card/50 backdrop-blur-sm p-4 space-y-3 min-h-[160px]">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold">
-                                        {content.title.charAt(0) || "U"}
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-sm">Your Name</p>
-                                        <p className="text-xs text-muted-foreground">Just now</p>
-                                    </div>
-                                </div>
-                                <Textarea
-                                    value={content.linkedinPost}
-                                    onChange={(e) => handleFieldChange("linkedinPost", e.target.value)}
-                                    placeholder="Write your LinkedIn post..."
-                                    className="min-h-[80px] resize-none border-0 p-0 focus-visible:ring-0 bg-transparent"
-                                    maxLength={300}
-                                />
-                            </div>
-                        </div>
-                        <div className="flex justify-between text-xs">
-                            <span className={cn("font-medium", getCharacterProgress(content.linkedinPost, 300).color)}>
-                                {content.linkedinPost.length}/300
-                            </span>
-                            <div className="w-32 h-1.5 bg-muted rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-blue-500 transition-all duration-300 rounded-full"
-                                    style={{ width: `${getCharacterProgress(content.linkedinPost, 300).percentage}%` }}
-                                />
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+                {/* X Media Placeholder */}
+                {content.twitterPost && (
+                    <div className="bg-gray-200 h-48 mx-4 rounded-2xl"></div>
+                )}
 
-                {/* Twitter Post */}
-                <Card className="group relative overflow-hidden border-2 transition-all hover:shadow-xl hover:border-sky-500/50">
-                    <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-transparent to-sky-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <CardHeader>
-                        <div className="flex items-center gap-2">
-                            <Twitter className="h-5 w-5 text-sky-500" />
-                            <CardTitle>Twitter/X Post</CardTitle>
-                        </div>
-                        <CardDescription>Concise & engaging • Max 280 characters</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        {/* Twitter Preview */}
-                        <div className="relative">
-                            <div className="rounded-lg border bg-card/50 backdrop-blur-sm p-4 space-y-3 min-h-[160px]">
-                                <div className="flex items-start gap-2">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center text-white font-semibold flex-shrink-0">
-                                        {content.title.charAt(0) || "U"}
-                                    </div>
-                                    <div className="flex-1 space-y-1">
-                                        <div className="flex items-center gap-1">
-                                            <p className="font-semibold text-sm">Your Name</p>
-                                            <span className="text-muted-foreground text-xs">@username · now</span>
-                                        </div>
-                                        <Textarea
-                                            value={content.twitterPost}
-                                            onChange={(e) => handleFieldChange("twitterPost", e.target.value)}
-                                            placeholder="What's happening?"
-                                            className="min-h-[80px] resize-none border-0 p-0 focus-visible:ring-0 bg-transparent text-sm"
-                                            maxLength={280}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex justify-between text-xs">
-                            <span className={cn("font-medium", getCharacterProgress(content.twitterPost, 280).color)}>
-                                {content.twitterPost.length}/280
-                            </span>
-                            <div className="w-32 h-1.5 bg-muted rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-sky-500 transition-all duration-300 rounded-full"
-                                    style={{ width: `${getCharacterProgress(content.twitterPost, 280).percentage}%` }}
-                                />
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+                {/* X Timestamp */}
+                <div className="px-4 py-2">
+                    <p className="text-gray-500 text-sm">1:52 PM · Oct 14, 2023 · 200.1K Views</p>
+                </div>
+
+                {/* X Stats */}
+                <div className="px-4 py-3 border-y border-gray-200">
+                    <div className="flex items-center gap-4 text-sm">
+                        <span className="text-gray-900"><strong>931</strong> <span className="text-gray-500">Retweets</span></span>
+                        <span className="text-gray-900"><strong>13</strong> <span className="text-gray-500">Quotes</span></span>
+                        <span className="text-gray-900"><strong>3,857</strong> <span className="text-gray-500">Likes</span></span>
+                        <span className="text-gray-900"><strong>90</strong> <span className="text-gray-500">Bookmarks</span></span>
+                    </div>
+                </div>
+
+                {/* X Actions */}
+                <div className="px-4 py-3 flex items-center justify-around border-b border-gray-200">
+                    <button className="text-gray-500 hover:text-sky-500">
+                        <MessageSquare className="w-5 h-5" />
+                    </button>
+                    <button className="text-gray-500 hover:text-green-500">
+                        <Repeat2 className="w-5 h-5" />
+                    </button>
+                    <button className="text-gray-500 hover:text-pink-500">
+                        <Heart className="w-5 h-5" />
+                    </button>
+                    <button className="text-gray-500 hover:text-sky-500">
+                        <BarChart2 className="w-5 h-5" />
+                    </button>
+                    <button className="text-gray-500 hover:text-sky-500">
+                        <Share className="w-5 h-5" />
+                    </button>
+                </div>
+
+                {/* X Post Actions */}
+                <div className="px-4 py-3 flex gap-3">
+                    <Button className="flex-1 bg-sky-500 hover:bg-sky-600 text-white">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        Schedule
+                    </Button>
+                    <Button className="flex-1 bg-primary hover:bg-primary/90">
+                        <Send className="w-4 h-4 mr-2" />
+                        Post Now
+                    </Button>
+                </div>
             </div>
-
-            {/* Summary Card */}
-            <Card className="group relative overflow-hidden border-2 transition-all hover:shadow-xl hover:border-purple-500/50">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <CardHeader>
-                    <div className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-purple-500" />
-                        <CardTitle>Summary</CardTitle>
-                    </div>
-                    <CardDescription>Brief overview • Max 200 characters</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                    <Textarea
-                        value={content.summary}
-                        onChange={(e) => handleFieldChange("summary", e.target.value)}
-                        placeholder="Enter a brief summary..."
-                        className="min-h-[100px] bg-background/50 backdrop-blur-sm resize-none"
-                        maxLength={200}
-                    />
-                    <div className="flex justify-between text-xs">
-                        <span className={cn("font-medium", getCharacterProgress(content.summary, 200).color)}>
-                            {content.summary.length}/200 characters
-                        </span>
-                        <div className="w-32 h-1.5 bg-muted rounded-full overflow-hidden">
-                            <div
-                                className={cn(
-                                    "h-full transition-all duration-300 rounded-full",
-                                    getCharacterProgress(content.summary, 200).color.replace("text-", "bg-")
-                                )}
-                                style={{ width: `${getCharacterProgress(content.summary, 200).percentage}%` }}
-                            />
-                        </div>
-                    </div>
-                </CardContent>
-            </Card>
         </div>
     );
 }

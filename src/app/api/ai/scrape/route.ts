@@ -54,7 +54,7 @@ Return your response in the following JSON format:
   "twitterPost": "...",
   "summary": "..."
 }}`;
-
+        
         const prompt = PromptTemplate.fromTemplate(template);
         const chain = prompt.pipe(model);
 

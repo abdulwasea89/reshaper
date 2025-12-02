@@ -16,15 +16,7 @@ export default async function HomePage() {
     return (
         <>
             <Navbar user={session?.user} />
-
             <Hero />
-
-
-
-            {/* <section className="w-full">
-                <HowItWorks />
-            </section> */}
-
             <section className="w-full">
                 <Features />
             </section>

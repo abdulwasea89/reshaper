@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { PlusCircleIcon, MailIcon, ChevronRight } from "lucide-react";
-
+import { PlusCircleIcon, MailIcon, ChevronRight, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/shadcn/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/shadcn/collapsible";
 import {
@@ -144,6 +145,7 @@ const NavItemCollapsed = ({
 export function NavMain({ items }: NavMainProps) {
   const path = usePathname();
   const { state, isMobile } = useSidebar();
+  const [isCreatingPost, setIsCreatingPost] = useState(false);
 
   const isItemActive = (url: string, subItems?: NavMainItem["subItems"]) => {
     if (subItems?.length) {
@@ -156,6 +158,33 @@ export function NavMain({ items }: NavMainProps) {
     return subItems?.some((sub) => path.startsWith(sub.url)) ?? false;
   };
 
+  const handleCreatePost = async () => {
+    setIsCreatingPost(true);
+    try {
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create post");
+      }
+
+      const data = await response.json();
+
+      // Show success message
+      toast.success("Post created! Redirecting...");
+
+      // Redirect to the new post page
+      window.location.href = `/p/${data.id}/create`;
+    } catch (error) {
+      console.error("Error creating post:", error);
+      toast.error("Failed to create post. Please try again.");
+      setIsCreatingPost(false);
+    }
+  };
+
   return (
     <>
       <SidebarGroup>
@@ -163,20 +192,22 @@ export function NavMain({ items }: NavMainProps) {
           <SidebarMenu>
             <SidebarMenuItem className="flex items-center gap-2">
               <SidebarMenuButton
-                tooltip="Quick Create"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
-                onClick={async () => {
-                  try {
-                    const response = await fetch("/api/posts", { method: "POST" });
-                    const data = await response.json();
-                    window.location.href = `/p/${data.id}/create`;
-                  } catch (error) {
-                    console.error("Error creating post:", error);
-                  }
-                }}
+                tooltip="Create a Post"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleCreatePost}
+                disabled={isCreatingPost}
               >
-                <PlusCircleIcon />
-                <span>Quick Create</span>
+                {isCreatingPost ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Creating...</span>
+                  </>
+                ) : (
+                  <>
+                    <PlusCircleIcon />
+                    <span>Create a Post</span>
+                  </>
+                )}
               </SidebarMenuButton>
               <Button
                 size="icon"
