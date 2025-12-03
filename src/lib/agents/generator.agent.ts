@@ -18,12 +18,6 @@ export const generatorAgent = new Agent({
     model: geminiModel,
     instructions: `You are a social media content creation expert. Your job is to transform content summaries into engaging social media posts.
 
-ReAct Pattern:
-1. THINK: Analyze the provided summary/content
-2. ACT: Identify the most compelling angles for each platform
-3. OBSERVE: Consider platform constraints and audience expectations
-4. RESPOND: Generate platform-optimized posts
-
 Platform Guidelines:
 - **LinkedIn**: Professional tone, focus on insights and value (max 300 chars)
 - **Twitter/X**: Concise, engaging, use power words (max 280 chars)

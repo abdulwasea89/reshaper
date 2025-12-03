@@ -8,7 +8,7 @@ export const ModelConfig = {
     temperature: parseFloat(process.env.GEMINI_MODEL_TEMP || "0.7"),
     maxTokens: parseInt(process.env.GEMINI_MAX_TOKENS || "4000"),
     maxIterations: parseInt(process.env.AGENT_MAX_ITERATIONS || "5"),
-    apiKey: process.env.GEMINI_API_KEY!,
+    apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY!,
     baseURL: process.env.BASE_URL! || "https://generativelanguage.googleapis.com/v1beta/openai/",
 } as const;
 
