@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { CheerioWebBaseLoader } from "@langchain/community/document_loaders/web/cheerio";
-import { generateContentFromUrl } from "@/lib/ai-agents";
+import { google } from "@ai-sdk/google";
+import { generateText } from "ai";
+import * as cheerio from 'cheerio';
 
 export async function POST(request: NextRequest) {
     try {
@@ -21,15 +22,46 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "URL is required" }, { status: 400 });
         }
 
-        // Load and scrape the web page
-        const loader = new CheerioWebBaseLoader(url);
-        const docs = await loader.load();
-        const pageContent = docs[0].pageContent;
+        // Scrape the URL
+        const response = await fetch(url, {
+            headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' },
+        });
+        const html = await response.text();
+        const $ = cheerio.load(html);
+        $('script, style, nav, header, footer').remove();
+        const pageContent = $('article, main, .content').first().text().trim() || $('body').text().trim();
+        const cleanContent = pageContent.replace(/\s+/g, ' ').slice(0, 4000);
 
-        // Use OpenAI Agent to generate content
-        const generatedContent = await generateContentFromUrl(
-            pageContent.slice(0, 4000) // Limit content to avoid token limits
-        );
+        // Generate content using Gemini
+        const model = google("gemini-2.0-flash-exp");
+
+        const result = await generateText({
+            model,
+            prompt: `Based on this content, generate social media posts:
+
+${cleanContent}
+
+Return ONLY a JSON object with these fields:
+{
+  "title": "catchy title (max 100 chars)",
+  "linkedinPost": "professional LinkedIn post (max 300 chars)",
+  "twitterPost": "engaging tweet (max 280 chars)",
+  "summary": "brief summary (max 200 chars)"
+}`,
+        });
+
+        let generatedContent;
+        try {
+            const jsonMatch = result.text.match(/\{[\s\S]*\}/);
+            generatedContent = jsonMatch ? JSON.parse(jsonMatch[0]) : null;
+        } catch {
+            generatedContent = {
+                title: "Generated Content",
+                linkedinPost: cleanContent.slice(0, 300),
+                twitterPost: cleanContent.slice(0, 280),
+                summary: cleanContent.slice(0, 200),
+            };
+        }
 
         return NextResponse.json({
             success: true,
@@ -47,3 +79,4 @@ export async function POST(request: NextRequest) {
         );
     }
 }
+

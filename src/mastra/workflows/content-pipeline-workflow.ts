@@ -182,11 +182,11 @@ Return as JSON array with: style, content, platform, hashtags`;
 
         return {
             posts: [
-                { style: 'viral', content: 'Generated viral post', platform: 'both', hashtags: [] },
-                { style: 'professional', content: 'Generated professional post', platform: 'linkedin', hashtags: [] },
-                { style: 'punchy', content: 'Generated punchy post', platform: 'x', hashtags: [] },
-                { style: 'story', content: 'Generated story post', platform: 'both', hashtags: [] },
-                { style: 'thread', content: 'Generated thread post', platform: 'x', hashtags: [] },
+                { style: 'viral' as const, content: 'Generated viral post', platform: 'both' as const, hashtags: [] as string[] },
+                { style: 'professional' as const, content: 'Generated professional post', platform: 'linkedin' as const, hashtags: [] as string[] },
+                { style: 'punchy' as const, content: 'Generated punchy post', platform: 'x' as const, hashtags: [] as string[] },
+                { style: 'story' as const, content: 'Generated story post', platform: 'both' as const, hashtags: [] as string[] },
+                { style: 'thread' as const, content: 'Generated thread post', platform: 'x' as const, hashtags: [] as string[] },
             ],
         };
     },

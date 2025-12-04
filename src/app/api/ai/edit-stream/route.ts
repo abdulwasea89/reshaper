@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { editContentWithAgents, ContentOutput } from "@/lib/legacy-agents";
+import { google } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+interface ContentOutput {
+    title: string;
+    linkedinPost: string;
+    twitterPost: string;
+    summary: string;
+}
 
 export async function POST(request: NextRequest) {
     const encoder = new TextEncoder();
@@ -20,7 +28,6 @@ export async function POST(request: NextRequest) {
                 JSON.stringify({ error: "Unauthorized" }),
                 { status: 401, headers: { "Content-Type": "application/json" } }
             );
-
         }
 
         const { currentContent, editRequest } = await request.json();
@@ -41,11 +48,39 @@ export async function POST(request: NextRequest) {
                         encoder.encode(`data: ${JSON.stringify({ type: "start", message: "Editing content..." })}\n\n`)
                     );
 
-                    // Use OpenAI Agents editor
-                    const editedContent = await editContentWithAgents(
-                        currentContent as ContentOutput,
-                        editRequest
-                    );
+                    // Use Gemini to edit content
+                    const model = google("gemini-2.0-flash-exp");
+
+                    const result = await generateText({
+                        model,
+                        prompt: `You are a content editor. Edit the following content based on the request.
+
+Current Content:
+${JSON.stringify(currentContent, null, 2)}
+
+Edit Request: ${editRequest}
+
+Rules:
+- Keep the same JSON structure
+- Apply the requested changes precisely
+- Maintain platform character limits
+
+Return ONLY a JSON object:
+{
+  "title": "edited title",
+  "linkedinPost": "edited linkedin post",
+  "twitterPost": "edited twitter post",
+  "summary": "edited summary"
+}`,
+                    });
+
+                    let editedContent: ContentOutput;
+                    try {
+                        const jsonMatch = result.text.match(/\{[\s\S]*\}/);
+                        editedContent = jsonMatch ? JSON.parse(jsonMatch[0]) : currentContent;
+                    } catch {
+                        editedContent = currentContent as ContentOutput;
+                    }
 
                     // Create a natural response message
                     const responseMessage = `I've updated your content based on your request: "${editRequest}". The changes have been applied to your posts.`;
@@ -105,3 +140,4 @@ export async function POST(request: NextRequest) {
         );
     }
 }
+

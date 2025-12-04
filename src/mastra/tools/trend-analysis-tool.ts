@@ -1,8 +1,16 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 
+// Common interface for trend posts
+interface TrendPost {
+    id: string;
+    content: string;
+    engagement: Record<string, number>;
+    patterns: string[];
+}
+
 // Mock trending posts data - will be replaced with real API calls when credentials available
-const MOCK_X_TRENDS = [
+const MOCK_X_TRENDS: TrendPost[] = [
     {
         id: '1',
         content: 'Just shipped a major feature and the lessons learned were incredible. Here\'s what I wish I knew earlier: 1. Start with the end user in mind 2. Test early, test often 3. Documentation is not optional',
@@ -23,7 +31,7 @@ const MOCK_X_TRENDS = [
     },
 ];
 
-const MOCK_LINKEDIN_TRENDS = [
+const MOCK_LINKEDIN_TRENDS: TrendPost[] = [
     {
         id: '1',
         content: 'I was rejected 47 times before landing my dream job.\n\nHere\'s what finally worked:\n\n1. I stopped applying blindly\n2. I started reaching out to employees directly\n3. I shared my journey publicly\n\nThe result? 3 offers in 2 weeks.',
@@ -74,7 +82,7 @@ export const trendAnalysisTool = createTool({
         const hasXCredentials = !!process.env.TWITTER_BEARER_TOKEN;
         const hasLinkedInCredentials = !!process.env.LINKEDIN_CLIENT_ID && !!process.env.LINKEDIN_CLIENT_SECRET;
 
-        let trends: typeof MOCK_X_TRENDS = [];
+        let trends: TrendPost[] = [];
         let isMockData = true;
 
         if (platform === 'x' || platform === 'both') {

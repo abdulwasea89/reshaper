@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { editContent } from "@/lib/ai-agents";
+import { google } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 export async function POST(request: NextRequest) {
     try {
@@ -23,11 +24,39 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Use OpenAI Agent to edit content
-        const editedContent = await editContent(
-            JSON.stringify(currentContent),
-            editRequest
-        );
+        // Use Gemini to edit content
+        const model = google("gemini-2.0-flash-exp");
+
+        const result = await generateText({
+            model,
+            prompt: `You are a content editor. Edit the following content based on the request.
+
+Current Content:
+${JSON.stringify(currentContent, null, 2)}
+
+Edit Request: ${editRequest}
+
+Rules:
+- Keep the same JSON structure
+- Apply the requested changes precisely
+- Maintain platform character limits (LinkedIn: 300 chars, Twitter: 280 chars, Title: 100 chars, Summary: 200 chars)
+
+Return ONLY a JSON object with the edited content:
+{
+  "title": "edited title",
+  "linkedinPost": "edited linkedin post",
+  "twitterPost": "edited twitter post",
+  "summary": "edited summary"
+}`,
+        });
+
+        let editedContent;
+        try {
+            const jsonMatch = result.text.match(/\{[\s\S]*\}/);
+            editedContent = jsonMatch ? JSON.parse(jsonMatch[0]) : currentContent;
+        } catch {
+            editedContent = currentContent;
+        }
 
         return NextResponse.json({
             success: true,
@@ -44,3 +73,4 @@ export async function POST(request: NextRequest) {
         );
     }
 }
+

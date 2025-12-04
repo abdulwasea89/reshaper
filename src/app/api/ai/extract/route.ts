@@ -122,7 +122,11 @@ export async function POST(request: NextRequest) {
                 // Assume content is base64 encoded PDF
                 const pdfParse = (await import('pdf-parse')).default;
                 const pdfBuffer = Buffer.from(content, 'base64');
-                const data = await pdfParse(pdfBuffer);
+                const data = await pdfParse(pdfBuffer) as {
+                    text: string;
+                    numpages?: number;
+                    info?: { Title?: string; Author?: string };
+                };
 
                 extractedContent = {
                     rawContent: data.text.replace(/\s+/g, ' ').trim().slice(0, 50000),
@@ -206,7 +210,7 @@ Respond ONLY with valid JSON in this format:
                 rawContent: extractedContent.rawContent,
                 summary: analysis.summary,
                 keyInsights: analysis.keyInsights,
-                metadata: extractedContent.metadata,
+                metadata: extractedContent.metadata as Record<string, unknown> as import('@prisma/client').Prisma.InputJsonValue,
                 userId: session.user.id,
             },
         });

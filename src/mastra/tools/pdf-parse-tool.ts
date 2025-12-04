@@ -4,6 +4,16 @@ import { z } from 'zod';
 // PDF parsing is done server-side only
 // We'll use dynamic import to avoid issues with the package
 
+interface PdfParseResult {
+    text: string;
+    numpages: number;
+    info?: {
+        Title?: string;
+        Author?: string;
+        Creator?: string;
+    };
+}
+
 export const pdfParseTool = createTool({
     id: 'pdf-parse',
     description: 'Parses text content from a PDF file provided as base64 or URL',
@@ -53,7 +63,7 @@ export const pdfParseTool = createTool({
             }
 
             // Parse the PDF
-            const data = await pdfParse(pdfBuffer);
+            const data = await pdfParse(pdfBuffer) as PdfParseResult;
 
             // Clean up the text
             const cleanText = data.text
