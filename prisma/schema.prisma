@@ -23,6 +23,8 @@ model User {
   sessions      Session[]
   accounts      Account[]
   posts         Post[]
+  contentSources ContentSource[]
+  templates     Template[]
 
   @@unique([email])
   @@map("user")
@@ -52,7 +54,90 @@ model Post {
   userId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  // New relations for content repurposing
+  sourceId     String?
+  source       ContentSource? @relation(fields: [sourceId], references: [id])
+  versions     PostVersion[]
+
   @@map("post")
+}
+
+model ContentSource {
+  id           String   @id @default(cuid())
+  type         String   // "url", "youtube", "pdf", "text"
+  originalUrl  String?
+  rawContent   String   @db.Text
+  summary      String?  @db.Text
+  keyInsights  String[] // Array of extracted insights
+  metadata     Json?    // Additional metadata (video title, author, etc.)
+  createdAt    DateTime @default(now())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  posts        Post[]
+
+  @@map("content_source")
+}
+
+model PostVersion {
+  id            String   @id @default(cuid())
+  postId        String
+  post          Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  style         String   // "viral", "professional", "punchy", "story", "thread"
+  platform      String   // "x", "linkedin"
+  content       String   @db.Text
+  viralityScore Float?
+  scoreDetails  Json?    // Breakdown: { hook, clarity, emotion, novelty, compliance }
+  suggestions   String[] // Improvement suggestions
+  version       Int      @default(1)
+  isOptimized   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  scheduledPosts ScheduledPost[]
+
+  @@map("post_version")
+}
+
+model Template {
+  id             String   @id @default(cuid())
+  name           String
+  description    String?
+  style          String   // "story", "announcement", "educational", "listicle", etc.
+  promptTemplate String   @db.Text
+  exampleOutput  String?  @db.Text
+  platforms      String[] // Which platforms this template is for
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("template")
+}
+
+model ScheduledPost {
+  id            String      @id @default(cuid())
+  postVersionId String
+  postVersion   PostVersion @relation(fields: [postVersionId], references: [id], onDelete: Cascade)
+  platform      String
+  scheduledFor  DateTime
+  status        String      @default("pending") // pending, published, failed, cancelled
+  publishedAt   DateTime?
+  error         String?
+  retryCount    Int         @default(0)
+  createdAt     DateTime    @default(now())
+
+  @@map("scheduled_post")
+}
+
+model TrendData {
+  id          String   @id @default(cuid())
+  platform    String   // "x", "linkedin"
+  topic       String
+  patterns    Json     // Extracted patterns from trending posts
+  samplePosts Json     // Sample trending post structures
+  engagement  Json?    // Engagement metrics
+  fetchedAt   DateTime @default(now())
+  expiresAt   DateTime // When this data should be refreshed
+
+  @@map("trend_data")
 }
 
 model Session {
@@ -99,3 +184,4 @@ model Verification {
 
   @@map("verification")
 }
+
