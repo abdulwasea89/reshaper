@@ -2,7 +2,6 @@ import { Agent } from '@mastra/core/agent';
 import { webSearchTool } from '../tools/web-search-tool';
 import { urlScrapeTool } from '../tools/url-scrape-tool';
 import { pdfParseTool } from '../tools/pdf-parse-tool';
-import { youtubeTranscriptTool } from '../tools/youtube-transcript-tool';
 
 export const researchAgent = new Agent({
     name: 'Research Agent',
@@ -12,7 +11,6 @@ You have access to the following tools:
 - webSearchTool: Search the web for information on any topic. Use this when you need to find current information, news, or research topics.
 - urlScrapeTool: Extract content from any web URL (articles, blogs, websites). Use this when given a specific URL to analyze.
 - pdfParseTool: Parse and extract text from PDF files (via URL or base64). Use this for PDF documents.
-- youtubeTranscriptTool: Get transcripts from YouTube videos. Use this when analyzing YouTube content.
 
 When given a task:
 1. Think about what information you need and which tool(s) are most appropriate
@@ -26,6 +24,5 @@ Be thorough in your research but also concise in your responses. If you need to 
         webSearchTool,
         urlScrapeTool,
         pdfParseTool,
-        youtubeTranscriptTool,
     },
 });
