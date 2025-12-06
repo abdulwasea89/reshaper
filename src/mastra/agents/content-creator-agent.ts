@@ -129,7 +129,7 @@ export const contentCreatorAgent = new Agent({
         6. Use 2025 for all current year references
 
         Transform any input into ONE research-backed, engaging LinkedIn post.`,
-    model: 'google/gemini-2.0-flash',
+    model: 'qwen/qwen3-32b',
     tools: {
         web_search: webSearchTool,
         web_fetch: urlScrapeTool,
