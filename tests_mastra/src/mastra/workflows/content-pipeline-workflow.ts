@@ -22,11 +22,6 @@ const extractedContentSchema = z.object({
     }),
 });
 
-const trendAnalysisSchema = z.object({
-    patterns: z.array(z.string()),
-    recommendations: z.array(z.string()),
-    contentMatch: z.number(),
-});
 
 const generatedPostsSchema = z.object({
     posts: z.array(z.object({
@@ -74,6 +69,9 @@ const formattedPostsSchema = z.object({
     })),
 });
 
+// Helper for rate limiting
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 // Step 1: Extract content
 const extractContentStep = createStep({
     id: 'extract-content',
@@ -110,46 +108,17 @@ const extractContentStep = createStep({
     },
 });
 
-// Step 2: Analyze trends
-const analyzeTrendsStep = createStep({
-    id: 'analyze-trends',
-    inputSchema: extractedContentSchema,
-    outputSchema: trendAnalysisSchema,
-    execute: async ({ inputData, mastra }) => {
-        const analyzerAgent = mastra.getAgent('analyzerAgent');
 
-        const prompt = `Analyze trending content on both X and LinkedIn. 
-    
-Content to compare against:
-${inputData.summary}
-
-Key insights from the content:
-${inputData.keyInsights.join('\n')}
-
-Use the trendAnalysisTool to fetch trending posts, then provide:
-1. Common patterns in trending posts
-2. How well this content matches current trends
-3. Specific recommendations for improvement`;
-
-        const response = await analyzerAgent.generate(prompt);
-
-        return {
-            patterns: [],
-            recommendations: [],
-            contentMatch: 7,
-        };
-    },
-});
-
-// Step 3: Generate posts
 const generatePostsStep = createStep({
     id: 'generate-posts',
     inputSchema: z.object({
         content: extractedContentSchema,
-        trends: trendAnalysisSchema,
     }),
     outputSchema: generatedPostsSchema,
     execute: async ({ inputData, mastra }) => {
+        // Rate limit delay
+        await delay(35000);
+
         const generatorAgent = mastra.getAgent('generatorAgent');
 
         const prompt = `Based on this content and trend analysis, generate 5 post versions:
@@ -162,12 +131,6 @@ ${inputData.content.summary}
 
 KEY INSIGHTS:
 ${inputData.content.keyInsights.join('\n')}
-
-TREND PATTERNS TO INCORPORATE:
-${inputData.trends.patterns.join('\n')}
-
-RECOMMENDATIONS:
-${inputData.trends.recommendations.join('\n')}
 
 Generate these 5 versions:
 1. Viral version - maximum engagement hooks
@@ -198,6 +161,9 @@ const scorePostsStep = createStep({
     inputSchema: generatedPostsSchema,
     outputSchema: scoredPostsSchema,
     execute: async ({ inputData, mastra }) => {
+        // Rate limit delay
+        await delay(35000);
+
         const scorerAgent = mastra.getAgent('scorerAgent');
 
         const scoredPosts = await Promise.all(
@@ -241,6 +207,9 @@ const optimizePostsStep = createStep({
     inputSchema: scoredPostsSchema,
     outputSchema: scoredPostsSchema,
     execute: async ({ inputData, mastra }) => {
+        // Rate limit delay
+        await delay(35000);
+
         const optimizerAgent = mastra.getAgent('optimizerAgent');
 
         const optimizedPosts = await Promise.all(
@@ -287,6 +256,9 @@ const formatPostsStep = createStep({
     inputSchema: scoredPostsSchema,
     outputSchema: formattedPostsSchema,
     execute: async ({ inputData, mastra }) => {
+        // Rate limit delay
+        await delay(35000);
+
         const formatterAgent = mastra.getAgent('formatterAgent');
 
         const formattedPosts = await Promise.all(
@@ -342,7 +314,6 @@ export const contentPipelineWorkflow = createWorkflow({
     outputSchema: formattedPostsSchema,
 })
     .then(extractContentStep)
-    .then(analyzeTrendsStep)
     .map(async ({ inputData, getStepResult }) => {
         const contentResult = getStepResult('extract-content');
         return {
