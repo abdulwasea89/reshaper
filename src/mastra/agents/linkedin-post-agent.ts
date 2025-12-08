@@ -45,5 +45,5 @@ When given a topic, information, or content:
 5. Keep it authentic and engaging
 
 Always output the final LinkedIn post ready to copy-paste, formatted correctly with line breaks.`,
-    model: 'google/gemini-2.0-flash',
+    model: 'groq/llama-3.3-70b-versatile',
 });

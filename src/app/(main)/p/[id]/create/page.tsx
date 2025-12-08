@@ -11,5 +11,5 @@ export default async function CreatePost({
     const resolvedSearchParams = await searchParams;
     const urlParam = resolvedSearchParams.url;
 
-    return <CreatePostClient params={params} urlParam={urlParam} />;
+    // return <CreatePostClient params={params} urlParam={urlParam} />;
 }

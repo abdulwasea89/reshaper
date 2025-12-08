@@ -19,7 +19,7 @@ When given a task:
 4. Always cite your sources with URLs when available
 
 Be thorough in your research but also concise in your responses. If you need to search for something, do it. If you're given a URL, extract and analyze its content. Make decisions autonomously to fulfill the user's request.`,
-    model: 'google/gemini-2.0-flash',
+    model: 'groq/llama-3.3-70b-versatile',
     tools: {
         webSearchTool,
         urlScrapeTool,
