@@ -1,4 +1,4 @@
-import { CreatePostClient } from "./client";
+import { CreatePostClient } from "../../../dashboard/client";
 
 export default async function CreatePost({
     params,

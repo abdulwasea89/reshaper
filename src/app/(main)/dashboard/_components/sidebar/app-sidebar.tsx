@@ -3,7 +3,8 @@
 import Link from "next/link";
 
 import { Settings, CircleHelp, Search, Database, ClipboardList, File, Command } from "lucide-react";
-
+import { SidebarTrigger } from "@/components/ui/web/sidebar";
+import { Separator } from "@/components/ui/shadcn/separator";
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +15,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/web/sidebar";
 import { APP_CONFIG } from "@/config/app-config";
-import { rootUser } from "@/data/users";
 import { sidebarItems } from "@/navigation/sidebar/sidebar-items";
 
 import { NavMain } from "./nav-main";
@@ -68,23 +68,14 @@ export function AppSidebar({
   };
 }) {
   return (
-    <Sidebar {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-              <Link href="/dashboard/default">
-                <Command />
-                <span className="text-base font-semibold">{APP_CONFIG.name}</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
+    <Sidebar {...props} className="dark">
+      {/* <SidebarHeader>
+        <div className="flex items-center p-2">
+          <SidebarTrigger />
+        </div>
+      </SidebarHeader> */}
       <SidebarContent>
         <NavMain items={sidebarItems} />
-        {/* <NavDocuments items={data.documents} /> */}
-        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />

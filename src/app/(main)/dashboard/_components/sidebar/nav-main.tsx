@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 
 import { PlusCircleIcon, MailIcon, ChevronRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/shadcn/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/shadcn/collapsible";
 import {
   DropdownMenu,
@@ -27,6 +26,7 @@ import {
   useSidebar,
 } from "@/components/ui/web/sidebar";
 import { type NavGroup, type NavMainItem } from "@/navigation/sidebar/sidebar-items";
+import { Separator } from "@/components/ui/shadcn/separator";
 
 interface NavMainProps {
   readonly items: readonly NavGroup[];
@@ -189,11 +189,13 @@ export function NavMain({ items }: NavMainProps) {
     <>
       <SidebarGroup>
         <SidebarGroupContent className="flex flex-col gap-2">
+          <SidebarGroupLabel>Posts</SidebarGroupLabel>
+
           <SidebarMenu>
             <SidebarMenuItem className="flex items-center gap-2">
               <SidebarMenuButton
                 tooltip="Create a Post"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear disabled:opacity-50 disabled:cursor-not-allowed"
+                className=" text-white bg-sidebar-accent hover:text-white active:bg-primary/90 active:text-white min-w-8 duration-200 ease-linear disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleCreatePost}
                 disabled={isCreatingPost}
               >
@@ -204,19 +206,11 @@ export function NavMain({ items }: NavMainProps) {
                   </>
                 ) : (
                   <>
-                    <PlusCircleIcon />
+
                     <span>Create a Post</span>
                   </>
                 )}
               </SidebarMenuButton>
-              <Button
-                size="icon"
-                className="h-9 w-9 shrink-0 group-data-[collapsible=icon]:opacity-0"
-                variant="outline"
-              >
-                <MailIcon />
-                <span className="sr-only">Inbox</span>
-              </Button>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroupContent>
